@@ -1,0 +1,18 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=todo.txt
+Name[fr]=todo.txt
+Type=Service
+ServiceTypes=Plasma/Applet
+Icon=basket
+X-Plasma-API=python
+X-Plasma-MainScript=code/main.py
+X-KDE-PluginInfo-Author=Khosrow E
+X-KDE-PluginInfo-Email=devnull@khosrow.ca
+X-KDE-PluginInfo-Name=todotxt_applet
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Website=http://code.khosrow.ca
+X-KDE-PluginInfo-Category=Productivity
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true 
