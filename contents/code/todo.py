@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import commands
 import sys
 import re
@@ -58,32 +59,37 @@ class TodoList():
 	
 	def __init__(self, data_path):
 		self._dataPath = data_path
+		self.refreshList()
+	
+	def refreshList(self):
 		try:
-			f = open(data_path)
+			f = open(self._dataPath)
 			lines = f.readlines()
+			f.close
 		except IOError:
 			print "Error: unable to read ", self._dataPath
 			sys.exit()
 		else:
+			self._todos = list()
 			i = 1 
 			for line in lines:
 				(text, junk) = line.split("\n")
 				todo = TodoItem(str(i), text)
 				self._todos.append(todo)
 				i += 1
-	
 	def getList(self):
 		return self._todos
 	
 	def getListHTML(self):
 		
 		for todo in self._todos:
-			text = "<span style=\"" + self._colors( todo.getPriority() ) + "\">" + todo.getText() . + "</span>\n"
+			text = "<span style=\"" + self._colors( todo.getPriority() ) + "\">" + todo.getText()  + "</span>\n"
 			output.append(text)
 		return output
 	
 
 
-todolist = TodoList("/Users/khosrow/Documents/todo/todo.txt")
+#todolist = TodoList("/Users/khosrow/Documents/todo/todo.txt")
+todolist = TodoList("/home/kandn/Documents/todo/todo.txt")
 for t in todolist.getList():
 	print t.getRaw()
