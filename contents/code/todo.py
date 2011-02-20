@@ -49,10 +49,12 @@ class TodoItem():
 		#raw_text = self._number + " (" + self._priority + ") " + self._text
 		#return raw_text
 		return self._number + " " + self._rawtext
+		
 	
 
 class TodoList():
 	_todos = list()
+	_todos_sorted = list()
 	_binPath = ""
 	_dataPath = ""
 	_colors = dict()
@@ -77,19 +79,34 @@ class TodoList():
 				todo = TodoItem(str(i), text)
 				self._todos.append(todo)
 				i += 1
-	def getList(self):
-		return self._todos
+	
+	def getList(self, sort='none'):
+		if sort == 'none':
+			return self._todos
+		#elif sort == 'priority':
+		#	for todo in self._todos:
+		#		if todo.getPriority() == "A"
+	
+	def sortList(self):
+		bufferList = list()
+		for todo in self._todos:
+			if len(bufferList) > 0:
+				if todo.getPriority() == "":
+					bufferList.append(todo)
+				else:
+					for x in bufferList[:]:
+						if todo.getPriority() < x.getPriority() or x.getPriority() == "":
+							i = bufferList.index(x)
+							bufferList.insert(i, todo)
+							break
+					#bufferList.append(todo)
+			else:
+				bufferList.append(todo)
+		return bufferList
 	
 	def getListHTML(self):
-		
 		for todo in self._todos:
 			text = "<span style=\"" + self._colors( todo.getPriority() ) + "\">" + todo.getText()  + "</span>\n"
 			output.append(text)
 		return output
-	
 
-
-#todolist = TodoList("/Users/khosrow/Documents/todo/todo.txt")
-todolist = TodoList("/home/kandn/Documents/todo/todo.txt")
-for t in todolist.getList():
-	print t.getRaw()
