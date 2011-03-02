@@ -36,9 +36,6 @@ class TodoItem():
 	def getNumber(self):
 		return self._number
 	
-	def getText(self):
-		return self._text
-	
 	def getContexts(self):
 		return self._contexts
 	
@@ -49,7 +46,23 @@ class TodoItem():
 		#raw_text = self._number + " (" + self._priority + ") " + self._text
 		#return raw_text
 		return self._number + " " + self._rawtext
-		
+	
+	def getText(self,number=False,priority=False,projects=False,contexts=False):
+		text = ""
+		if number == True:
+		  text = text + self._number + " "
+		if priority == True:
+		  text = text + "(" + self._priority + ") " 
+		text = text + self._text
+		if projects == True:
+		  for project in self._projects:
+			text = text + " @" + project
+		if contexts == True:
+		  print len(self._contexts)
+		  for context in self._contexts:
+			text = text + "  +" + context
+		#return self._text
+		return text
 	
 
 class TodoList():
@@ -62,6 +75,9 @@ class TodoList():
 	def __init__(self, data_path):
 		self._dataPath = data_path
 		self.refreshList()
+	
+	def setDataPath(self, data_path):
+		self._dataPath = data_path
 	
 	def refreshList(self):
 		try:
