@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# -*- coding: iso-8859-1 -*-
 import commands
 import sys
 import re
@@ -12,9 +12,14 @@ class TodoItem():
 	_projects = list()
 	def __init__(self, number, raw_text):
 		self._rawtext = raw_text
+		self._contexts = list()
+		self._projects = list()
 		self._number = number
 		words = raw_text.split(" ")
 		
+		pri_match = ""
+		proj_match = ""
+		cont_match = ""
 		i = 0
 		for word in words:
 			i += 1
@@ -29,7 +34,6 @@ class TodoItem():
 				self._contexts.append(cont_match.group(1))
 			else:	
 				self._text += word + " "
-	
 	def getPriority(self):
 		return self._priority
 	
@@ -50,18 +54,17 @@ class TodoItem():
 	def getText(self,number=False,priority=False,projects=False,contexts=False):
 		text = ""
 		if number == True:
-		  text = text + self._number + " "
+			text = text + self._number + " "
 		if priority == True:
-		  text = text + "(" + self._priority + ") " 
+			if self._priority != "":
+				text = text + "(" + self._priority + ") " 
 		text = text + self._text
 		if projects == True:
-		  for project in self._projects:
-			text = text + " @" + project
+			for project in self._projects:
+				text = text + "+" + project + " "
 		if contexts == True:
-		  print len(self._contexts)
-		  for context in self._contexts:
-			text = text + "  +" + context
-		#return self._text
+			for context in self._contexts:
+				text = text + "@" + context + " "
 		return text
 	
 
@@ -96,12 +99,8 @@ class TodoList():
 				self._todos.append(todo)
 				i += 1
 	
-	def getList(self, sort='none'):
-		if sort == 'none':
-			return self._todos
-		#elif sort == 'priority':
-		#	for todo in self._todos:
-		#		if todo.getPriority() == "A"
+	def getList(self):
+		return self._todos
 	
 	def sortList(self):
 		bufferList = list()
@@ -115,7 +114,6 @@ class TodoList():
 							i = bufferList.index(x)
 							bufferList.insert(i, todo)
 							break
-					#bufferList.append(todo)
 			else:
 				bufferList.append(todo)
 		return bufferList
