@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# -*- coding: iso-8859-1 -*-
 # <Copyright and license information goes here.>
 #from PyQt4.QtCore import Qt, QPoint
 from PyQt4.QtCore import *
@@ -12,7 +12,7 @@ import string
 
 from todo import TodoList
 #from configDialog import ConfigDialog
-from configform import ConfigForm
+#from configform import ConfigForm
  
 class TodoApplet(plasmascript.Applet):
 	_todolist = ""
@@ -26,7 +26,7 @@ class TodoApplet(plasmascript.Applet):
 		#self.resize(350, 350)
 		#self.setAspectRatioMode(Plasma.Square)
 		self.setAspectRatioMode(Plasma.IgnoreAspectRatio)
-		self._settings["todoURL"] = "/home/khosrow/Documents/todo.txt"
+		self._settings["todoURL"] = "/home/ib/dads/khe/Documents/todo/todo.txt"
 		self._settings["showLineNumbers"] = False
 		self._settings["showPriority"] = False
 		self._settings["showProjects"] = False
@@ -40,11 +40,8 @@ class TodoApplet(plasmascript.Applet):
 		#self._settings["priorityDColor"] = Qt.blue        
 		self._settings["priorityDColor"] = "#0000ff"        
 		self._todolist = TodoList(self._settings["todoURL"])
-		print "filepath:"
-		print str(self.package().filePath('ui', 'config.ui'))
-		print "----"
-		print "priority a color:"
-		print str(self._settings["priorityAColor"])
+		print "DEBUG -- filepath: " + str(self.package().filePath('ui', 'config.ui'))
+		print "DEBUG -- priority A color: " + str(self._settings["priorityAColor"])
 	
 	def createConfigurationInterface(self, parent):
 		#self._configForm = ConfigForm(parent, self._settings)
@@ -123,7 +120,6 @@ class TodoApplet(plasmascript.Applet):
 			else:
 				painter.setPen(Qt.white)
 			# now draw the text in the widget
-			print len(item.getContexts())
 			painter.drawText(point,item.getText(self._settings["showLineNumbers"],
 							    self._settings["showPriority"],
 							    self._settings["showProjects"],
