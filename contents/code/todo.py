@@ -103,21 +103,33 @@ class TodoList():
 		return self._todos
 	
 	def sortList(self):
-		bufferList = list()
-		for todo in self._todos:
-			if len(bufferList) > 0:
-				if todo.getPriority() == "":
-					bufferList.append(todo)
-				else:
-					for x in bufferList[:]:
-						if todo.getPriority() < x.getPriority() or x.getPriority() == "":
-							i = bufferList.index(x)
-							bufferList.insert(i, todo)
-							break
-			else:
-				bufferList.append(todo)
-		return bufferList
+		return self.mergeSort(self._todos)
 	
+	def mergeSort(self, l):
+		if len(l) < 2:
+		  return l 
+		else:
+		  # recursively sort 
+		  middle = len(l) / 2
+		  # sorting left size
+		  left = self.mergeSort(l[:middle])
+		  right= self.mergeSort(l[middle:])
+		  return self.merge(left,right)
+	def merge(self, left, right):
+		# merge the left list with the right list and return the result
+		result = list()
+		i,j = 0,0
+		while i < len(left) and j < len(right):
+		  if (left[i].getPriority() != "" and left[i].getPriority() <= right[j].getPriority()) or right[j].getPriority() == "":
+		    result.append(left[i])
+		    i += 1
+		  else:
+		    result.append(right[j])
+		    j += 1
+		result += left[i:]
+		result += right[j:]
+		return result
+		
 	def getListHTML(self):
 		for todo in self._todos:
 			text = "<span style=\"" + self._colors( todo.getPriority() ) + "\">" + todo.getText()  + "</span>\n"
