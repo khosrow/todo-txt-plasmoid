@@ -6,7 +6,7 @@ Currently only reading is supported and in order to add to the file you still ne
 
 Requirements
 ------------
-This widget works in conjunction with todotxt CLI script, available at http://todotxt.com
+This widget works in conjunction with todotxt CLI script, available at http://todotxt.com. A full KDE installation with kde-plasma is needed as well. 
 
 Building from source
 --------------------
