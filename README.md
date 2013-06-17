@@ -11,6 +11,7 @@ Building from source
 --------------------
 Use the following commands to build the plasmoid on KDE 4.x:
 
+        git clone git://github.com/khosrow/todo-txt-plasmoid.git todotxt_plasmoid
 	cd todotxt_plasmoid 
 	zip -x ".git/*" -x ".gitignore" -x "*/*.pyc" -x "build.sh" -x "*~" -r ../todotxt_plasmoid.plasmoid .
 	cd ..
